@@ -1,38 +1,36 @@
-name: CD to Hugging Face Spaces
+name: Deploy to Hugging Face Spaces
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    branches: [ "main" ]     # or: tags: [ "v*" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: ${{ github.workspace }}
-      HF_SPACE: spaces/ymcaPrabhu/Emotion-Detection-App
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - name: Sync to HF Space
+        uses: huggingface/actions/hub@main
         with:
-          lfs: true
-          fetch-depth: 0
+          repo: spaces/name: Deploy to Hugging Face Spaces
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+on:
+  push:
+    branches: [ "main" ]     # or: tags: [ "v*" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync to HF Space
+        uses: huggingface/actions/hub@main
         with:
-          python-version: "3.11"
+          repo: spaces/ymcaPrabhu/Emotion-Detection-App
+          token: ${{ secrets.HF_TOKEN }}
+          # (optional) subfolder: path/to/app
 
-      - name: Install dependencies
-        run: python -m pip install --upgrade pip && pip install -r requirements.txt && pip install pytest
-
-
-      - name: Push to Hugging Face Space
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git remote add space https://huggingface.co/${HF_SPACE} || true && git push https://TOKEN:${HF_TOKEN}@huggingface.co/${HF_SPACE} HEAD:main --force
-
-      - name: Show Space URL
-        run: echo "Deployed: https://huggingface.co/${HF_SPACE}"
+          token: ${{ secrets.HF_TOKEN }}
+          # (optional) subfolder: path/to/app
