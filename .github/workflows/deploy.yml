@@ -27,4 +27,4 @@ jobs:
           git push "https://TOKEN:${HF_TOKEN}@huggingface.co/${HF_SPACE}" HEAD:main --force
 
       - name: Show Space URL
-        run: echo "Deployed: https://huggingface.co/spaces/ymcaPrabhu/My-First"
+        run: echo "Deployed: https://huggingface.co/spaces/ymcaPrabhu/Emotion-Detection-App"
