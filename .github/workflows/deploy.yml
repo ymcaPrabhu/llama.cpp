@@ -20,7 +20,7 @@ jobs:
 
       - name: Push to Hugging Face Space
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }} 
         run: |
           HF_SPACE="spaces/ymcaPrabhu/Emotion-Detection-App"
           git remote add space "https://huggingface.co/${HF_SPACE}" || true
