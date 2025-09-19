@@ -13,7 +13,7 @@ jobs:
       - name: Sync to HF Space
         uses: huggingface/actions/hub@main
         with:
-          repo: ymcaPrabhu/Emotion-Detection-App
+          repo: spaces/ymcaPrabhu
 
 on:
   push:
